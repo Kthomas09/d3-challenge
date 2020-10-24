@@ -1,21 +1,24 @@
 // @TODO: YOUR CODE HERE!
-var svgWidth = 1500;
-var svgHeight = 1000;
+var svgWidth = 920;
+var svgHeight = 620;
 
 var margin = {
-    top: 40,
-    right: 60,
-    bottom: 80,
+    top: 20,
+    right: 40,
+    bottom: 200,
     left: 100 
 }
 
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
-var svg = d3.select("#scatter")
-            .append("svg")
-            .attr("width", svgWidth)
-            .attr("height", svgHeight);
+var chart = d3.select("#scatter")
+              .append("div")
+              .attr("class", "chart");
+
+var svg = chart.append("svg")
+               .attr("width", svgWidth)
+               .attr("height", svgHeight);
 
 var chartGroup = svg.append("g")
                     .attr("transform", `translate(${margin.left}, ${margin.top})`);
@@ -27,6 +30,7 @@ d3.csv("assets/data/data.csv").then(function(data){
         healthData.poverty = +healthData.poverty;
     });
 
+    
     var xLinearScale = d3.scaleLinear()
                          .domain([20, d3.max(data, d => d.healthcare)])
                          .range([0, width]);
